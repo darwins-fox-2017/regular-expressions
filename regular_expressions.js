@@ -2,6 +2,8 @@
 
 // Determine whether a string contains a nomor KTP
 const has_ktp = (string) => {
+  var regex=/\d{3}-\d{2}-\d{4}/;
+  return regex.test(string);
   // ...
 }
 
@@ -15,7 +17,8 @@ console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // t
 
 // Return the Social Security number from a string.
 const grab_ktp = (string) => {
-  // ...
+  var regex=/\d{3}-\d{2}-\d{4}/
+  return string.match(regex);
 }
 
 console.log('grab_ktp returns nomor KTP if the string has an nomor KTP')
@@ -29,6 +32,8 @@ console.log(grab_ktp('please confirm your identity: XXX-XX-1422') === null) // t
 // Return all of the Social Security numbers from a string.
 const grab_all_nomor_ktp = (string) => {
   // ...
+  var regex=/\d{3}-\d{2}-\d{4}/g
+  return string.match(regex);
 }
 
 console.log('grab_all_nomor_ktp returns all nomor KTP if the string has any nomor KTP')
@@ -44,7 +49,8 @@ console.log(grab_all_nomor_ktp('please confirm your identity: XXX-XX-1422')) // 
 
 // Obfuscate all of the nomor KTP in a string. Example: XXX-XX-4430.
 const hide_all_nomor_ktp = (string) => {
-  // ...
+   var regex=/(\d{3})-(\d{2})-(\d{4})/g;
+   return string.replace(regex,"XXX-XXX-$3")
 }
 
 console.log('hide_all_nomor_ktp obfuscates any nomor KTP in the string')
@@ -54,7 +60,7 @@ console.log(hide_all_nomor_ktp('234-60-1422, 350-80-0744, 013-60-8762')) // true
 
 console.log('hide_all_nomor_ktp does not alter a string without nomor KTP in it')
 
-let string = 'please confirm your identity: XXX-XX-1422'
+var string = 'please confirm your identity: XXX-XX-1422'
 console.log(hide_all_nomor_ktp(string) === string) // true
 
 // -----------------------------------------------------------------------------
@@ -62,7 +68,8 @@ console.log(hide_all_nomor_ktp(string) === string) // true
 // Ensure all of the Social Security numbers use dashes for delimiters.
 // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
-  // ...
+  var regex=/(\d{3})[.-]*(\d{2})[.-]*(\d{4})/g
+  return string.replace(regex,'$1-$2-$3');
 }
 
 console.log('format_nomor finds and reformat any nomor KTP in the string')
@@ -70,5 +77,5 @@ console.log(format_nomor('234601422, 350.80.0744, 013-60-8762') === '234-60-1422
 
 console.log('format_nomor does not alter a string without nomor KTP in it')
 
-let string = 'please confirm your identity: 44211422'
+var string = 'please confirm your identity: 44211422'
 console.log(format_nomor(string) === string) // true
