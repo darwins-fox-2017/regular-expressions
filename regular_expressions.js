@@ -18,6 +18,9 @@ console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // t
 const grab_ktp = (string) => {
   // ...
   var num_ktp = string.match(/\d{3}-\d{2}-\d{4}/)
+  if(num_ktp) {
+    return num_ktp[0]
+  }
   return num_ktp;
 }
 
